@@ -3,11 +3,31 @@ import TextField from "@mui/material/TextField";
 import { Button, Box } from "@mui/material";
 import { useFormik } from "formik";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import * as yup from "yup";
 import axios from "axios";
 
 function UserEdit() {
   const param = useParams();
   const navigate = useNavigate();
+  const formikValidation = yup.object({
+    Name: yup
+      .string()
+      .min(5, "Name Must Contain Min 5 characters")
+      .required("Please Fill The Name"),
+    Email: yup
+      .string()
+      .min(7, "Email Must Contain Min 7 characters")
+      .required("Please Fill The Email"),
+    Image: yup
+      .string()
+      .min(7, "Image Must Contain Min 7 characters")
+      .required("Please Fill The Image"),
+    English: yup.number().required("Please Fill The English Mark"),
+    Tamil: yup.number().required("Please Fill The Tamil Mark"),
+    Maths: yup.number().required("Please Fill The Maths Mark"),
+    Science: yup.number().required("Please Fill The Science Mark"),
+    SocialScience: yup.number().required("Please Fill The SocialScience Mark"),
+  });
   const formik = useFormik({
     initialValues: {
       Name: "",
@@ -19,20 +39,7 @@ function UserEdit() {
       Science: "",
       SocialScience: "",
     },
-    validate: (values) => {
-      let error = {};
-      if (values.Name === "") {
-        error.Name = "Please Enter Name";
-      }
-      if (values.Name.length < 4) {
-        error.Name = "Name length Should Greater 5 ";
-      }
-      if (values.Email === "") {
-        error.Email = "Please Enter Email";
-      }
-
-      return error;
-    },
+    validationSchema: formikValidation,
     onSubmit: async (value) => {
       await axios.put(
         `https://631d700ecc652771a4859a9c.mockapi.io/Student/${param.id}`,
@@ -81,66 +88,124 @@ function UserEdit() {
               label="Name"
               value={formik.values.Name}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="Name"
               variant="outlined"
+              error={formik.touched.Name && formik.errors.Name}
+              helperText={
+                formik.touched.Name && formik.errors.Name
+                  ? formik.errors.Name
+                  : null
+              }
             />
-            <span style={{ color: "red" }}>{formik.errors.Name}</span>
+
             <TextField
               id="outlined-basic"
               label="Email"
               value={formik.values.Email}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="Email"
               variant="outlined"
+              error={formik.touched.Email && formik.errors.Email}
+              helperText={
+                formik.touched.Email && formik.errors.Email
+                  ? formik.errors.Email
+                  : null
+              }
             />
-            <span style={{ color: "red" }}>{formik.errors.Email}</span>
+
             <TextField
               id="outlined-basic"
               label="Image"
               value={formik.values.Image}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="Image"
               variant="outlined"
+              error={formik.touched.Image && formik.errors.Image}
+              helperText={
+                formik.touched.Image && formik.errors.Image
+                  ? formik.errors.Image
+                  : null
+              }
             />
             <TextField
               id="outlined-basic"
               label="English"
               value={formik.values.English}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="English"
               variant="outlined"
+              error={formik.touched.English && formik.errors.English}
+              helperText={
+                formik.touched.English && formik.errors.English
+                  ? formik.errors.English
+                  : null
+              }
             />
             <TextField
               id="standard-basic"
               label="Tamil"
               value={formik.values.Tamil}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="Tamil"
               variant="outlined"
+              error={formik.touched.Tamil && formik.errors.Tamil}
+              helperText={
+                formik.touched.Tamil && formik.errors.Tamil
+                  ? formik.errors.Tamil
+                  : null
+              }
             />
             <TextField
               id="outlined-basic"
               label="Maths"
               value={formik.values.Maths}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="Maths"
               variant="outlined"
+              error={formik.touched.Maths && formik.errors.Maths}
+              helperText={
+                formik.touched.Maths && formik.errors.Maths
+                  ? formik.errors.Maths
+                  : null
+              }
             />
             <TextField
               id="outlined-basic"
               label="Science"
               value={formik.values.Science}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="Science"
               variant="outlined"
+              error={formik.touched.Science && formik.errors.Science}
+              helperText={
+                formik.touched.Science && formik.errors.Science
+                  ? formik.errors.Science
+                  : null
+              }
             />
             <TextField
               id="outlined-basic"
               label="SocialScience"
               value={formik.values.SocialScience}
               onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
               name="SocialScience"
               variant="outlined"
+              error={
+                formik.touched.SocialScience && formik.errors.SocialScience
+              }
+              helperText={
+                formik.touched.SocialScience && formik.errors.SocialScience
+                  ? formik.errors.SocialScience
+                  : null
+              }
             />
             <Button
               variant="contained"

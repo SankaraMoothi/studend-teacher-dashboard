@@ -97,7 +97,7 @@ function SideBar({ mode, setMode }) {
                   textAlign="center"
                   onClick={() => navigate("/Users")}
                 >
-                  Add Users
+                  Add_Users
                 </Typography>
               </MenuItem>
               <MenuItem onClick={handleCloseNavMenu}>
